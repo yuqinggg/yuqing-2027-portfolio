@@ -6,6 +6,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --bg: #15140f;
   --text: #f2ede0;
   --muted: #b8b09b;
@@ -16,6 +17,19 @@
   --display: "Clash Display", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
   --ui: "TikTok Sans", system-ui, sans-serif;
+}
+
+/* Light mode (Figma 15:469), turned on by the switch after "fun" */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f2ede0;
+  --text: #1e1e1e;
+  --muted: #6e6754; /* not in Figma: its #b8b09b is unreadable on cream */
+}
+
+/* White artwork would vanish on cream; Figma's light frame doesn't handle this yet */
+:root[data-theme="light"] .mono {
+  filter: invert(1);
 }
 
 *,
@@ -127,6 +141,53 @@ a:focus-visible {
 /* last logo before the comma has no margin (monad.svg already includes its own) */
 .logo:last-of-type {
   margin-right: 0;
+}
+
+/* Switch after "fun". Sizes are design px at 96px type, so it scales with the headline */
+.switch {
+  --u: calc(1em / 96);
+  position: relative;
+  flex: none;
+  width: calc(189 * var(--u));
+  height: calc(80 * var(--u));
+  margin-inline: calc(8 * var(--u)) calc(16 * var(--u)); /* + the line's 8px gap = 16px after "fun" */
+  padding: 0;
+  border: calc(5 * var(--u)) solid var(--text);
+  border-radius: 999px;
+  background: #fff url("../img/home/sky.jpg") no-repeat;
+  background-size: calc(373 * var(--u)) calc(116 * var(--u));
+  background-position: calc(-5 * var(--u)) calc(-4.9 * var(--u));
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.switch-knob {
+  position: absolute;
+  top: 50%;
+  left: calc(8 * var(--u));
+  width: calc(57 * var(--u));
+  height: calc(57 * var(--u));
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  transform: translateY(-50%);
+  transition: transform 0.25s ease;
+}
+
+/* on: knob slides to the right edge (179 inner width - 57 knob - 2×8 inset) */
+.switch[aria-checked="true"] .switch-knob {
+  transform: translate(calc(106 * var(--u)), -50%);
+}
+
+.switch:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switch-knob {
+    transition: none;
+  }
 }
 
 /* Projects (carried over from the 2023 homepage) */

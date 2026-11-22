@@ -28,13 +28,14 @@
         <span class="line">Hi, I enjoy</span>
         <span class="line">building things</span>
         <span class="line">for work
-          <img class="logo" src="img/home/sia.svg" alt="Singapore Airlines" width="52" height="64" />
+          <img class="logo mono" src="img/home/sia.svg" alt="Singapore Airlines" width="52" height="64" />
           <img class="logo" src="img/home/star-alliance.png" alt="Star Alliance" width="67" height="64" />
-          <img class="logo logo-govtech" src="img/home/govtech.png" alt="GovTech" width="80" height="80" />,</span>
+          <img class="logo logo-govtech mono" src="img/home/govtech.png" alt="GovTech" width="80" height="80" />,</span>
         <span class="line">for hackathons
           <img class="logo" src="img/home/cursor.svg" alt="Cursor" width="56" height="64" />
-          <img class="logo" src="img/home/monad.svg" alt="Monad" width="71" height="64" />,</span>
-        <span class="line">and for fun.</span>
+          <img class="logo mono" src="img/home/monad.svg" alt="Monad" width="71" height="64" />,</span>
+        <span class="line">and for fun
+          <button class="switch" type="button" role="switch" aria-checked="false" aria-label="Light mode"><span class="switch-knob"></span></button></span>
       </h1>
 
       <section class="projects" aria-label="Projects">
@@ -63,7 +64,15 @@
 
     <footer class="container footer">
       2026 © Made possible with Claude
-      <img src="img/home/claude.png" alt="" width="16" height="16" />
+      <img class="mono" src="img/home/claude.png" alt="" width="16" height="16" />
     </footer>
+    <script>
+      document.querySelector(".switch").addEventListener("click", (e) => {
+        const s = e.currentTarget;
+        const light = s.getAttribute("aria-checked") !== "true";
+        s.setAttribute("aria-checked", light);
+        document.documentElement.dataset.theme = light ? "light" : "dark";
+      });
+    </script>
   </body>
 </html>
