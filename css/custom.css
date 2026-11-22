@@ -1,0 +1,448 @@
+/* ////////////////////////////////////////
+  Your custom css here
+//////////////////////////////////////// */
+
+/* Hyperlink styling */
+a {
+    text-decoration: underline;
+}
+
+/* Navbar theme (automatic, set via data-navbar-theme on #mainNav) */
+#mainNav {
+    transition: background-color .3s ease, color .3s ease;
+}
+
+#mainNav.navbar-theme-light .navbar-brand,
+#mainNav.navbar-theme-light .nav-link {
+    color: #212529 !important;
+}
+
+#mainNav.navbar-theme-dark .navbar-brand,
+#mainNav.navbar-theme-dark .nav-link {
+    color: #ffffff !important;
+}
+
+/* margin for about page */
+.about-btm-margin{
+    margin-bottom: 3rem;
+}
+
+/* Project cover image 8000x4500*/
+.bg-img-1 {
+    /* The image used */
+    background-image: url(../img/miles-redemption/miles-redemption-cover.jpg);
+    background-color: #28386B;
+    min-height: 520px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+  .bg-img-2 {
+    /* The image used */
+    background-image: url(../img/international-delivery/international-delivery-cover.jpg);
+    background-color: #28386B;
+    min-height: 520px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+  .bg-img-3 {
+    /* The image used */
+    background-image: url(../img/interlogue/interlogue-cover.jpg);
+    background-color: #28386B;
+    min-height: 520px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+    .bg-img-4 {
+    /* The image used */
+    background-image: url(../img/voucher-redemption/voucher-cover.png);
+    background-color: #28386B;
+    min-height: 520px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+  .bg-img-5 {
+    /* The image used */
+    background-image: url(../img/krisshop-australia/krisshop-australia-cover.jpg);
+    background-color: #1A4D3A;
+    min-height: 520px;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    /* Needed to position the navbar */
+    position: relative;
+  }
+
+
+/* Gallery Container */
+/* .gallery-container {
+  background-color: rgb(253, 232, 71);
+}  */
+
+/* Remove default body margin */
+  body { 
+    padding: 0; 
+}
+/* Custom margin for containers */
+.body-container{
+    margin-top:120px;
+}
+
+/* Hide protected content and login screen */
+#protected-content { display: none; }
+#login-screen { display: none; text-align: center; margin-top: 100px; }
+
+/* Gallery CSS */
+.gallery-wrapper {
+    position: relative;
+    max-width: 100%;
+}
+
+.gallery-arrow {
+    z-index: 2;
+}
+
+/* Optional: style for slider dots if you want to keep them consistent */
+.slider-dot {
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: #bbb;
+    display: inline-block;
+    margin: 0 4px;
+    cursor: pointer;
+}
+
+/* Parallax Effect Styles */
+.parallax-container {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+    width: 100%;
+}
+.parallax {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    will-change: transform;
+}
+@media (max-width: 768px) {
+    .parallax-container {
+        height: 230px;
+    }
+}
+
+/* Photo Grid for Interlogue */
+
+.grid-row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+/* Create four equal columns that sits next to each other */
+.grid-column {
+  -ms-flex: 50%; /* IE10 */
+  flex: 50%;
+  max-width: 50%;
+  padding: 0 4px;
+}
+
+.grid-column img {
+  margin-top: 8px;
+  vertical-align: middle;
+  width: 100%;
+}
+
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media screen and (max-width: 800px) {
+  .grid-column {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .grid-column {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ============================================================
+   Miles Redemption Scroll Story — namespaced to #mr-stage
+   ============================================================ */
+
+html { scroll-behavior: smooth; }
+
+#mr-stage,
+#sel-stage,
+#loc-stage {
+  --accent: #1937CD;
+  --ink: #0B0B0B;
+  --page-bg: #F1F2F4;
+  --panel-bg: #FFFFFF;
+  --screen-h: 852px;
+  --step: 0;
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #1A1A1A;
+  background: var(--page-bg);
+}
+
+/* ---------- LEFT (static) ---------- */
+#mr-stage .left,
+#sel-stage .left,
+#loc-stage .left {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  flex: none;
+  width: 340px;
+  height: 100vh;
+  padding: 56px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--panel-bg);
+  border-right: 1px solid rgba(0,0,0,0.07);
+  z-index: 5;
+}
+#mr-stage .left h3,
+#sel-stage .left h3,
+#loc-stage .left h3 {
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.2;
+  margin: 8px 0 16px;
+  color: var(--ink);
+}
+#mr-stage .left .intro,
+#sel-stage .left .intro,
+#loc-stage .left .intro {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #6B6B6B;
+  margin: 0;
+}
+
+/* step nav */
+#mr-stage .steps-nav,
+#sel-stage .steps-nav,
+#loc-stage .steps-nav { display: flex; flex-direction: column; gap: 2px; margin: 36px 0; }
+#mr-stage .step-btn,
+#sel-stage .step-btn,
+#loc-stage .step-btn {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: calc(100% + 24px);
+  margin: 0 -12px;
+  padding: 11px 12px;
+  border: none;
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: #8A8A8A;
+  font-family: inherit;
+  transition: background .25s ease, color .25s ease;
+}
+#mr-stage .step-btn .dot,
+#sel-stage .step-btn .dot,
+#loc-stage .step-btn .dot {
+  flex: none;
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  background: #EDEDED; color: #A0A0A0;
+  transition: all .25s ease;
+}
+#mr-stage .step-btn .labels,
+#sel-stage .step-btn .labels,
+#loc-stage .step-btn .labels { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2; }
+#mr-stage .step-btn .lbl,
+#sel-stage .step-btn .lbl,
+#loc-stage .step-btn .lbl { font-weight: 700; font-size: 14px; }
+#mr-stage .step-btn .scr,
+#sel-stage .step-btn .scr,
+#loc-stage .step-btn .scr { font-size: 11.5px; color: #9A9A9A; font-weight: 500; }
+#mr-stage .step-btn.is-active,
+#sel-stage .step-btn.is-active,
+#loc-stage .step-btn.is-active { background: #F3F5FF; color: var(--ink); }
+#mr-stage .step-btn.is-active .dot,
+#sel-stage .step-btn.is-active .dot,
+#loc-stage .step-btn.is-active .dot { background: var(--accent); color: #fff; }
+#mr-stage .hint,
+#sel-stage .hint,
+#loc-stage .hint { font-size: 11px; color: #B4B4B4; letter-spacing: 0.04em; }
+
+/* ---------- CENTER (sticky phone) ---------- */
+#mr-stage .center,
+#sel-stage .center {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  flex: none;
+  width: 480px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+}
+#mr-stage .phone-scale,
+#sel-stage .phone-scale {
+  transform: scale(var(--scale, 1));
+  transform-origin: center center;
+}
+#mr-stage .bezel,
+#sel-stage .bezel {
+  position: relative;
+  width: 417px; height: 876px;
+  background: #0A0A0C;
+  border-radius: 58px;
+  padding: 12px;
+  box-shadow: 0 40px 90px -30px rgba(10,16,40,0.55), 0 0 0 2px rgba(255,255,255,0.06) inset;
+}
+#mr-stage .screen,
+#sel-stage .screen {
+  position: relative;
+  width: 393px; height: var(--screen-h);
+  border-radius: 46px;
+  overflow: hidden;
+  background: #fff;
+}
+#mr-stage .notch,
+#sel-stage .notch {
+  position: absolute;
+  top: 11px; left: 50%;
+  transform: translateX(-50%);
+  width: 124px; height: 34px;
+  background: #0A0A0C;
+  border-radius: 18px;
+  z-index: 20;
+}
+
+/* film strips */
+#mr-stage .film,
+#sel-stage .film,
+#loc-stage .film { transition: transform 0.85s cubic-bezier(0.65,0.02,0.18,1); }
+#mr-stage .phone-film,
+#sel-stage .phone-film {
+  position: absolute;
+  top: 0; left: 0;
+  width: 393px;
+  transform: translateY(calc(var(--step) * -1 * var(--screen-h)));
+}
+#mr-stage .screen-slot { width: 393px; height: var(--screen-h); overflow: hidden; }
+#sel-stage .screen-slot { width: 393px; height: var(--screen-h); overflow: hidden; }
+
+/* Seller Ecosystem — screens cross-fade instead of sliding */
+#sel-stage .phone-film { transform: none; }
+#sel-stage .screen-slot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+#sel-stage .screen-slot.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* ---------- RIGHT (sticky, slides in sync) ---------- */
+#mr-stage .right,
+#sel-stage .right,
+#loc-stage .right {
+  flex: 1;
+  min-width: 380px;
+  position: relative;
+}
+#mr-stage .pin,
+#sel-stage .pin,
+#loc-stage .pin {
+  position: sticky;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  background: var(--page-bg);
+}
+#mr-stage .text-film,
+#sel-stage .text-film,
+#loc-stage .text-film {
+  transform: translateY(calc(var(--step) * -100vh));
+}
+#mr-stage .panel,
+#sel-stage .panel,
+#loc-stage .panel {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 6vw 0 3vw;
+}
+#mr-stage .panel .eyebrow,
+#sel-stage .panel .eyebrow {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #C0C0C0;
+  margin-bottom: 10px;
+}
+#mr-stage .panel p,
+#sel-stage .panel p {
+  font-size: 16.5px;
+  line-height: 1.72;
+  color: #4A4A4A;
+  margin: 0;
+  max-width: 46ch;
+}
+#mr-stage .drivers .driver,
+#sel-stage .drivers .driver,
+#loc-stage .drivers .driver { height: 100vh; }
