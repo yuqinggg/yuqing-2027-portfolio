@@ -267,6 +267,118 @@ a:focus-visible {
   font-size: 14px;
 }
 
+/* About page */
+.about {
+  margin-bottom: 56px;
+}
+
+.about a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.hero-sm {
+  max-width: 16em;
+  padding-bottom: 24px;
+  font-size: clamp(32px, 4.4vw, 64px);
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.lead {
+  max-width: 36em;
+  margin: 0 0 56px;
+  font-size: clamp(18px, 1.6vw, 24px);
+  line-height: 1.5;
+  color: var(--muted);
+  transition: color 0.4s ease;
+}
+
+.cv {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+  gap: 16px 30px;
+  padding: 24px 0 40px;
+  border-top: 1px solid var(--rule);
+}
+
+.cv-label {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.4s ease;
+}
+
+.cv-list {
+  display: grid;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cv-org {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-bottom: 4px;
+  font-family: var(--display);
+  font-size: clamp(24px, 2.2vw, 32px);
+  line-height: 1.2;
+}
+
+/* Same proportions as the homepage: GovTech's box is 80px to SIA's 64px */
+.cv-logo {
+  width: auto;
+  height: 0.8em;
+}
+
+.cv-logo.logo-govtech {
+  width: 1em;
+  height: 1em;
+}
+
+.about a.cv-org {
+  text-decoration: none;
+}
+
+.about a.cv-org:hover {
+  text-decoration: underline;
+}
+
+.cv-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 24px;
+  margin: 4px 0 0;
+  line-height: 1.5;
+}
+
+.cv-date {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  color: var(--muted);
+  transition: color 0.4s ease;
+}
+
+@media (max-width: 700px) {
+  .cv {
+    grid-template-columns: 1fr;
+  }
+
+  .cv-row {
+    flex-direction: column;
+  }
+}
+
 /* Footer */
 .footer {
   position: relative;
