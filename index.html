@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" />
-    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=erode@400,600&display=swap" />
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,600&display=swap" />
     <link rel="stylesheet" href="css/home.css" />
     <!-- theme picked earlier this session, else the system's; runs before paint so there is no flash -->
     <script>
@@ -35,7 +35,7 @@
     </header>
 
     <main class="container">
-      <h1 class="hero">
+      <h1 class="hero" data-intro>
         <span class="line">Hi,
           <a class="hero-photo" href="about.html" aria-label="About me"><img src="img/home/hi.jpg" alt="" width="400" height="263" /></a>
           I enjoy</span>
@@ -48,7 +48,7 @@
           <img class="logo" src="img/home/cursor.svg" alt="Cursor" width="56" height="64" />
           <img class="logo mono" src="img/home/monad.svg" alt="Monad" width="71" height="64" />,</span>
         <span class="line">and for fun
-          <button class="switch" type="button" role="switch" aria-checked="false" aria-label="Light mode"><span class="switch-knob"></span></button></span>
+          <button class="switch" type="button" role="switch" aria-checked="false" aria-label="Light mode" data-tip="i love window seats"><span class="switch-knob"></span></button></span>
       </h1>
 
       <section class="projects" aria-label="Projects">
@@ -88,13 +88,8 @@
         document.documentElement.dataset.theme = light ? "light" : "dark";
         try { sessionStorage.setItem("theme", document.documentElement.dataset.theme); } catch (e) {}
       });
-      // the tooltip (.switch::after) sits below-right of these, measured from inside the switch's border
-      s.addEventListener("pointermove", (e) => {
-        const r = s.getBoundingClientRect();
-        s.style.setProperty("--tip-x", e.clientX - r.left - s.clientLeft + "px");
-        s.style.setProperty("--tip-y", e.clientY - r.top - s.clientTop + "px");
-      });
     </script>
+    <script src="js/tip.js"></script>
     <script src="js/hero-intro.js"></script>
   </body>
 </html>

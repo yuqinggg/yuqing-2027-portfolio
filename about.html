@@ -4,19 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="author" content="http://www.tayyuqing.com" />
-    <meta name="description" content="About Tay Yu Qing: digital experience lead, collaborative strategist, curious learner and problem solver." />
+    <meta name="description" content="About Tay Yu Qing, a product designer with an incessant curiosity for how systems work." />
     <link rel="canonical" href="http://www.tayyuqing.com/about.html" />
     <title>About | YuQing's Portfolio</title>
     <link rel="preload" href="fonts/ClashDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" />
-    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=erode@400,600&display=swap" />
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,600&display=swap" />
     <link rel="stylesheet" href="css/home.css" />
     <!-- theme picked earlier this session, else the system's; runs before paint so there is no flash -->
     <script>
       try { var savedTheme = sessionStorage.getItem("theme"); } catch (e) {}
       document.documentElement.dataset.theme = savedTheme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      // .js hides the intro until js/hero-intro.js plays it in; if that script never runs, show it anyway
+      document.documentElement.classList.add("js");
+      setTimeout(function () { window.heroIntro || document.documentElement.classList.remove("js"); }, 3000);
     </script>
   </head>
 
@@ -32,14 +35,20 @@
     </header>
 
     <main class="container about">
-      <h1 class="hero hero-sm">
-        Hey there, I'm a digital experience lead, collaborative strategist, curious learner and problem solver.
-      </h1>
-      <p class="lead">
-        In my free time, you can find me building Legos,
-        <a href="https://www.nationalgallery.sg/sg/en/learn-about-art/magazine/volunteer-voices-youth-volunteers.html">musing in museums</a>
-        or strategising my best moves in the latest board games.
-      </p>
+      <div class="about-intro" data-intro>
+        <span class="about-photo" data-tip="Building random structures at Designmuseum Danmark"><img src="img/home/about.jpg" alt="YuQing building random structures at Designmuseum Danmark" width="400" height="300" /></span>
+        <h1 class="hero hero-sm">I am a product designer.</h1>
+        <p class="lead">
+          I have an incessant curiosity for how systems work. All things big and small - from Lego modular system that makes every brick click
+          to transport networks that make each city tick. I enjoy taking things apart (figuratively, most of the time), connecting the dots and
+          identifying opportunities to make it better. It's this curiosity that shapes how I approach design.
+        </p>
+        <p class="lead">
+          In my free time, you can find me building Legos,
+          <a href="https://www.nationalgallery.sg/sg/en/learn-about-art/magazine/volunteer-voices-youth-volunteers.html">musing in museums</a>
+          or strategising my best moves in the latest board games.
+        </p>
+      </div>
 
       <section class="cv" aria-labelledby="work">
         <h2 class="cv-label" id="work">Work</h2>
@@ -82,20 +91,13 @@
           </li>
         </ul>
       </section>
-
-      <section class="cv" aria-labelledby="contact">
-        <h2 class="cv-label" id="contact">Contact</h2>
-        <ul class="cv-list">
-          <li><a class="cv-org" href="https://www.linkedin.com/in/tayyuqing/">linkedin.com/in/tayyuqing ↗</a></li>
-          <!-- TODO: href and visible address differ; confirm which email is current -->
-          <li><a class="cv-org" href="mailto:tayyuqing@gmail.com">tayyuqing.work@gmail.com ↗</a></li>
-        </ul>
-      </section>
     </main>
 
     <footer class="container footer">
       2026 © Made possible with Claude
       <img class="mono" src="img/home/claude.png" alt="" width="16" height="16" />
     </footer>
+    <script src="js/tip.js"></script>
+    <script src="js/hero-intro.js"></script>
   </body>
 </html>

@@ -20,7 +20,7 @@
   --gutter: clamp(16px, 4vw, 58.8px);
   --display: "Clash Display", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
-  --ui: "Erode", Georgia, serif; /* Fontshare, loaded in each page's <head> */
+  --ui: "Clash Grotesk", system-ui, sans-serif; /* Fontshare, loaded in each page's <head> */
 }
 
 /* Light mode (Figma 15:469), turned on by the switch after "fun" */
@@ -65,6 +65,7 @@ body,
 }
 
 body {
+  overflow-x: clip; /* a hidden [data-tip] tooltip still takes up room; this stops it making the page scroll sideways */
   margin: 0;
   background: var(--bg);
   color: var(--text);
@@ -156,15 +157,14 @@ a:focus-visible {
   letter-spacing: -0.01em;
 }
 
-/* Intro start state, played in by js/hero-intro.js: logos and switch stay out until the text has typed */
-.js .hero {
+/* Intro start state for the [data-intro] block (homepage hero, About intro), played in by js/hero-intro.js:
+   the pictures stay out until the text has typed */
+.js [data-intro] {
   opacity: 0;
   transform: translateY(40px);
 }
 
-.js .hero:not(.grow) .hero-photo,
-.js .hero:not(.grow) .logo,
-.js .hero:not(.grow) .switch {
+.js [data-intro]:not(.grow) :is(.hero-photo, .logo, .switch, .about-photo) {
   display: none;
 }
 
@@ -328,11 +328,14 @@ a:focus-visible {
   overflow: hidden;
 }
 
-/* Tooltip on hover/keyboard focus, styled like the nav pills. Visual only: the button's aria-label stays its name.
-   It follows the cursor, below-right of it (--tip-x/y set by the switch script); keyboard focus puts it below-right of the centre */
-.switch::after {
-  content: "i love window seats";
+/* Tooltip for any [data-tip] element (the switch, the About photo), styled like the nav pills. Visual only:
+   it isn't announced, so the element's own label or alt says the same.
+   It follows the cursor, below-right of it (--tip-x/y set by js/tip.js); keyboard focus puts it below-right of the centre.
+   The element needs position: relative */
+[data-tip]::after {
+  content: attr(data-tip);
   position: absolute;
+  z-index: 1;
   top: calc(var(--tip-y, 50%) + 20px); /* clears the cursor's arrow */
   left: calc(var(--tip-x, 50%) + 12px);
   padding: 6px 12px;
@@ -348,8 +351,8 @@ a:focus-visible {
   transition: opacity 0.2s ease, transform 0.2s ease; /* top/left aren't transitioned, so it tracks the cursor without lag */
 }
 
-.switch:hover::after,
-.switch:focus-visible::after {
+[data-tip]:hover::after,
+[data-tip]:focus-visible::after {
   opacity: 1;
   transform: none;
 }
@@ -359,7 +362,7 @@ a:focus-visible {
     transition: none;
   }
 
-  .switch::after {
+  [data-tip]::after {
     transform: none;
     transition: opacity 0.2s ease;
   }
@@ -426,23 +429,56 @@ a:focus-visible {
   text-underline-offset: 0.2em;
 }
 
+/* About intro (Figma 37:1663): photo, heading and paragraphs centred in a tall first block.
+   Placed like the homepage hero: fills the first screen with the text sitting low, same padding */
+.about-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  box-sizing: border-box;
+  min-height: 100svh;
+  margin-bottom: 56px;
+  padding: calc(76px + clamp(24px, 6.5vw, 96px)) 0 clamp(40px, 11svh, 128px);
+}
+
+/* a wrapper, since an <img> can't hold the [data-tip] tooltip */
+.about-photo {
+  position: relative;
+  width: 219px;
+  height: 160px;
+  margin: 24px 0;
+  border-radius: 8px;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
 .hero-sm {
   display: block; /* the About heading doesn't fill the screen like the homepage hero */
   min-height: 0;
   max-width: 16em;
-  padding-bottom: 24px;
+  padding: 0; /* .about-intro does the spacing */
   font-size: clamp(32px, 4.4vw, 64px);
   line-height: 1.1;
   text-wrap: balance;
 }
 
 .lead {
-  max-width: 36em;
-  margin: 0 0 56px;
-  font-size: clamp(18px, 1.6vw, 24px);
-  line-height: 1.5;
+  max-width: 29.33em; /* 704px at 24px */
+  margin: 0;
+  font-size: clamp(18px, 1.633vw, 24px); /* 24px at the 1470px design width */
+  line-height: 1.333; /* 32px at 24px */
   color: var(--muted);
   transition: color 0.4s ease;
+}
+
+.lead + .lead {
+  margin-top: 1.333em; /* Figma's blank line between paragraphs */
 }
 
 .cv {
