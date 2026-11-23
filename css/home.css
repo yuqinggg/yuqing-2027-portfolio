@@ -150,11 +150,32 @@ a:focus-visible {
   letter-spacing: -0.01em;
 }
 
+/* Intro start state, played in by js/hero-intro.js: logos and switch stay out until the text has typed */
+.js .hero {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.js .hero:not(.grow) .hero-photo,
+.js .hero:not(.grow) .logo,
+.js .hero:not(.grow) .switch {
+  display: none;
+}
+
 .line {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 8px;
+}
+
+/* Childhood photo after "Hi,", sized like the studio_works mockup (121×80 at 96px type) */
+.hero-photo {
+  width: 1.26em;
+  height: 0.833em;
+  margin-inline: 0.167em;
+  border-radius: 0.083em;
+  object-fit: cover;
 }
 
 .logo {
@@ -184,6 +205,7 @@ a:focus-visible {
 .switch {
   --u: calc(1em / 96);
   position: relative;
+  overflow: hidden; /* keeps the knob inside while the intro grows the switch from zero width */
   flex: none;
   width: calc(181 * var(--u));
   height: calc(72 * var(--u));

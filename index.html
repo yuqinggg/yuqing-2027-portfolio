@@ -16,6 +16,9 @@
     <script>
       try { var savedTheme = sessionStorage.getItem("theme"); } catch (e) {}
       document.documentElement.dataset.theme = savedTheme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+      // .js hides the hero until js/hero-intro.js plays it in; if that script never runs, show the hero anyway
+      document.documentElement.classList.add("js");
+      setTimeout(function () { window.heroIntro || document.documentElement.classList.remove("js"); }, 3000);
     </script>
   </head>
 
@@ -32,7 +35,9 @@
 
     <main class="container">
       <h1 class="hero">
-        <span class="line">Hi, I enjoy</span>
+        <span class="line">Hi,
+          <img class="hero-photo" src="img/home/hi.jpg" alt="" width="400" height="263" />
+          I enjoy</span>
         <span class="line">building things</span>
         <span class="line">for work
           <img class="logo mono" src="img/home/sia.svg" alt="Singapore Airlines" width="52" height="64" />
@@ -83,5 +88,6 @@
         try { sessionStorage.setItem("theme", document.documentElement.dataset.theme); } catch (e) {}
       });
     </script>
+    <script src="js/hero-intro.js"></script>
   </body>
 </html>
