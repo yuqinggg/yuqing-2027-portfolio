@@ -105,6 +105,8 @@ img {
 }
 
 .pill {
+  display: inline-flex;
+  align-items: flex-end;
   padding: 8px 12px;
   border-radius: 999px;
   font-size: 16px;
@@ -120,6 +122,14 @@ img {
   color: var(--pill-active-text);
 }
 
+/* arrow_outward used as a mask so it takes the pill's text colour in both themes */
+.pill-arrow {
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: url("../img/home/arrow-outward.svg") no-repeat center / contain;
+}
+
 a.pill:hover {
   filter: var(--pill-hover);
 }
@@ -132,7 +142,7 @@ a:focus-visible {
 /* Hero */
 .hero {
   margin: 0;
-  padding: calc(76px + clamp(32px, 9.1vw, 133.6px)) 0 40px; /* 133.6px at the design width */
+  padding: calc(76px + clamp(24px, 6.5vw, 96px)) 0 40px; /* raised from Figma's 133.6px */
   font-family: var(--display);
   font-weight: 400;
   font-size: clamp(44px, 6.6vw, 96px); /* 96px at the 1470px design width */
@@ -175,35 +185,58 @@ a:focus-visible {
   --u: calc(1em / 96);
   position: relative;
   flex: none;
-  width: calc(189 * var(--u));
-  height: calc(80 * var(--u));
-  margin-inline: calc(8 * var(--u)) calc(16 * var(--u)); /* + the line's 8px gap = 16px after "fun" */
+  width: calc(181 * var(--u));
+  height: calc(72 * var(--u));
   padding: 0;
   border: calc(5 * var(--u)) solid var(--text);
   border-radius: 999px;
   background: #fff url("../img/home/sky.jpg") no-repeat;
-  background-size: calc(373 * var(--u)) calc(116 * var(--u));
+  background-size: calc(306 * var(--u)) calc(95.2 * var(--u));
   background-position: calc(-5 * var(--u)) calc(-4.9 * var(--u));
+  /* Figma's 8px inset shadow sits on the sky image, which starts 4.9px above the visible area */
+  box-shadow: inset 0 calc(3 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.25);
   font-size: inherit;
   cursor: pointer;
+}
+
+/* Night sky for light mode (Figma 25:871), on its own layer so it can fade over the day sky */
+.switch::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url("../img/home/night.jpg") no-repeat;
+  background-size: calc(296 * var(--u)) calc(72 * var(--u));
+  background-position: calc(-37 * var(--u)) calc(-5 * var(--u));
+  box-shadow: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+:root[data-theme="light"] .switch {
+  border-color: #f2ede0; /* Figma keeps the cream rim in light mode */
+}
+
+:root[data-theme="light"] .switch::before {
+  opacity: 1;
 }
 
 .switch-knob {
   position: absolute;
   top: 50%;
   left: calc(8 * var(--u));
-  width: calc(57 * var(--u));
-  height: calc(57 * var(--u));
+  width: calc(46 * var(--u));
+  height: calc(46 * var(--u));
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.3);
+  background: #f2ede0;
+  box-shadow: 0 0 calc(4 * var(--u)) rgba(0, 0, 0, 0.5), inset 0 calc(8 * var(--u)) calc(4 * var(--u)) rgba(0, 0, 0, 0.25);
   transform: translateY(-50%);
   transition: transform 0.4s ease; /* same timing as the theme fade */
 }
 
-/* on: knob slides to the right edge (179 inner width - 57 knob - 2×8 inset) */
+/* on: knob slides to the right edge (171 inner width - 46 knob - 2×8 inset) */
 .switch[aria-checked="true"] .switch-knob {
-  transform: translate(calc(106 * var(--u)), -50%);
+  transform: translate(calc(109 * var(--u)), -50%);
 }
 
 .switch:focus-visible {

@@ -12,14 +12,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=TikTok+Sans&display=swap" />
     <link rel="stylesheet" href="css/home.css" />
+    <!-- theme picked earlier this session, else the system's; runs before paint so there is no flash -->
+    <script>
+      try { var savedTheme = sessionStorage.getItem("theme"); } catch (e) {}
+      document.documentElement.dataset.theme = savedTheme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    </script>
   </head>
 
   <body>
     <header class="nav">
       <nav aria-label="Main">
-        <!-- TODO: link to the projects section once it exists -->
-        <span class="pill is-active" aria-current="page">Projects</span>
-        <a class="pill" href="about.html">About</a>
+        <span class="pill is-active" aria-current="page">work</span>
+        <!-- TODO: link once the playground page exists -->
+        <span class="pill">playground</span>
+        <a class="pill" href="about.html">about</a>
+        <a class="pill" href="https://www.linkedin.com/in/tayyuqing/" target="_blank" rel="noopener">linkedin<span class="pill-arrow" aria-hidden="true"></span></a>
       </nav>
     </header>
 
@@ -67,11 +74,13 @@
       <img class="mono" src="img/home/claude.png" alt="" width="16" height="16" />
     </footer>
     <script>
-      document.querySelector(".switch").addEventListener("click", (e) => {
-        const s = e.currentTarget;
+      const s = document.querySelector(".switch");
+      s.setAttribute("aria-checked", document.documentElement.dataset.theme === "light");
+      s.addEventListener("click", () => {
         const light = s.getAttribute("aria-checked") !== "true";
         s.setAttribute("aria-checked", light);
         document.documentElement.dataset.theme = light ? "light" : "dark";
+        try { sessionStorage.setItem("theme", document.documentElement.dataset.theme); } catch (e) {}
       });
     </script>
   </body>

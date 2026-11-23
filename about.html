@@ -12,13 +12,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=TikTok+Sans&display=swap" />
     <link rel="stylesheet" href="css/home.css" />
+    <!-- theme picked earlier this session, else the system's; runs before paint so there is no flash -->
+    <script>
+      try { var savedTheme = sessionStorage.getItem("theme"); } catch (e) {}
+      document.documentElement.dataset.theme = savedTheme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+    </script>
   </head>
 
   <body>
     <header class="nav">
       <nav aria-label="Main">
-        <a class="pill" href="index.html">Projects</a>
-        <span class="pill is-active" aria-current="page">About</span>
+        <a class="pill" href="index.html">work</a>
+        <!-- TODO: link once the playground page exists -->
+        <span class="pill">playground</span>
+        <span class="pill is-active" aria-current="page">about</span>
+        <a class="pill" href="https://www.linkedin.com/in/tayyuqing/" target="_blank" rel="noopener">linkedin<span class="pill-arrow" aria-hidden="true"></span></a>
       </nav>
     </header>
 
@@ -40,7 +48,7 @@
             <p class="cv-row"><span>Product Designer</span><span class="cv-date">Sep 2026 – Present</span></p>
           </li>
           <li>
-            <a class="cv-org" href="https://www.krisshop.com">KrisShop</a>
+            <a class="cv-org" href="https://www.krisshop.com"><img class="cv-logo mono" src="img/home/sia.svg" alt="" width="52" height="64" />KrisShop</a>
             <p class="cv-row"><span>Digital Experience Lead</span><span class="cv-date">Aug 2025 – Jun 2026</span></p>
             <p class="cv-row"><span>Product Manager (UX)</span><span class="cv-date">Dec 2024 – Sep 2025</span></p>
             <p class="cv-row"><span>UX Strategist</span><span class="cv-date">Jul 2023 – Dec 2024</span></p>
@@ -54,7 +62,7 @@
             <p class="cv-row"><span>Communication Executive</span><span class="cv-date">Sep 2020 – Feb 2022</span></p>
           </li>
           <li>
-            <a class="cv-org" href="https://gsmproject.com/">GSM Project</a>
+            <a class="cv-org" href="https://www.gsmstudios.world/">GSM Project</a>
             <p class="cv-row"><span>Graphic Design Intern</span><span class="cv-date">May 2019 – Jul 2019</span></p>
           </li>
         </ul>
