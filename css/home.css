@@ -141,8 +141,14 @@ a:focus-visible {
 
 /* Hero */
 .hero {
+  /* fills the first screen with the text sitting low, so the projects start below the fold */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  min-height: 100svh;
   margin: 0;
-  padding: calc(76px + clamp(24px, 6.5vw, 96px)) 0 40px; /* raised from Figma's 133.6px */
+  padding: calc(76px + clamp(24px, 6.5vw, 96px)) 0 clamp(40px, 11svh, 128px); /* top keeps short screens clear of the nav */
   font-family: var(--display);
   font-weight: 400;
   font-size: clamp(44px, 6.6vw, 96px); /* 96px at the 1470px design width */
