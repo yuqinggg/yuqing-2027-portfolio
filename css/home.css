@@ -17,6 +17,7 @@
   --pill-active-bg: #fff;
   --pill-active-text: #000;
   --pill-hover: brightness(1.35);
+  --tab-active-text: #fff;
   --gutter: clamp(16px, 4vw, 58.8px);
   --display: "Clash Display", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -36,6 +37,7 @@
   --pill-active-bg: #1e1e1e;
   --pill-active-text: #f2ede0;
   --pill-hover: brightness(0.94);
+  --tab-active-text: #1e1e1e; /* not in Figma: white on the grey glass is unreadable on cream */
 }
 
 /* Registered so the nav's gradient colour can fade (gradients themselves can't transition) */
@@ -64,8 +66,13 @@ body,
   box-sizing: border-box;
 }
 
+/* a hidden [data-tip] tooltip still takes up room; this stops it widening the page. On html, not body,
+   so phones don't zoom the page out to fit it */
+html {
+  overflow-x: clip;
+}
+
 body {
-  overflow-x: clip; /* a hidden [data-tip] tooltip still takes up room; this stops it making the page scroll sideways */
   margin: 0;
   background: var(--bg);
   color: var(--text);
@@ -84,55 +91,163 @@ img {
 }
 
 /* Nav */
+/* Name left, glass tabs centred, email and LinkedIn right (Figma 33:1472) */
 .nav {
   position: sticky;
   top: 0;
   z-index: 10;
   height: 76px;
-  display: flex;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr; /* equal side columns keep the tabs centred */
   align-items: center;
-  justify-content: flex-end;
-  padding: 8px var(--gutter);
+  padding: 8px clamp(16px, 5.44vw, 80px); /* Figma's 80px at the 1470px width */
   margin-bottom: -76px; /* overlay the hero like the design, instead of pushing it down */
+  overflow-x: clip; /* the email icon's hidden tooltip otherwise makes phones zoom out (html's clip doesn't reach a sticky header) */
   background: linear-gradient(to bottom, var(--nav-tint), transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
   transition: --nav-tint 0.4s ease;
 }
 
-.nav nav {
-  display: flex;
-  gap: 8px;
-}
-
-.pill {
-  display: inline-flex;
-  align-items: flex-end;
-  padding: 8px 12px;
-  border-radius: 999px;
-  font-size: 16px;
-  line-height: 17.92px;
+.nav-name {
+  justify-self: start; /* link only as wide as the name, not the whole column */
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 20px;
+  color: var(--text);
   text-decoration: none;
-  background: var(--pill-bg);
-  color: var(--pill-text);
-  transition: filter 0.15s, background-color 0.4s ease, color 0.4s ease;
+  white-space: nowrap;
+  transition: color 0.4s ease;
 }
 
-.pill.is-active {
-  background: var(--pill-active-bg);
-  color: var(--pill-active-text);
+/* Frosted-glass tab switcher; the shadows are Figma's highlight and depth layers */
+.nav-tabs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-right: 12px; /* Figma nudges the tabs this far left of centre */
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(187, 187, 188, 0.12);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow:
+    0 1px 5px rgba(0, 0, 0, 0.2),
+    0 6px 16px rgba(0, 0, 0, 0.16),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    inset 1.8px 3px 0 -2px rgba(255, 255, 255, 0.27),
+    inset -2px -2px 0 -2px rgba(255, 255, 255, 0.24),
+    inset -3px -8px 1px -6px rgba(255, 255, 255, 0.18),
+    inset -0.3px -1px 4px 0 rgba(0, 0, 0, 0.24),
+    inset -1.5px 2.5px 0 -2px rgba(0, 0, 0, 0.4),
+    inset 0 3px 4px -2px rgba(0, 0, 0, 0.4),
+    inset 2px -6.5px 1px -4px rgba(0, 0, 0, 0.2);
 }
 
-/* arrow_outward used as a mask so it takes the pill's text colour in both themes */
-.pill-arrow {
-  width: 16px;
-  height: 16px;
-  background: currentColor;
-  mask: url("../img/home/arrow-outward.svg") no-repeat center / contain;
+.nav-tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 108px;
+  height: 24px;
+  border-radius: 999px;
+  font: 16px/18px var(--ui);
+  color: #777;
+  text-decoration: none;
+  transition: color 0.2s ease;
 }
 
-a.pill:hover {
-  filter: var(--pill-hover);
+a.nav-tab:hover {
+  color: var(--text);
+}
+
+/* the current page's tab is a raised glass pill, 4px bigger all round */
+.nav-tab.is-active {
+  width: 116px;
+  height: 32px;
+  background: rgba(187, 187, 188, 0.36);
+  color: var(--tab-active-text);
+  box-shadow:
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    inset 2px 1px 0 rgba(255, 255, 255, 0.27),
+    inset -1.5px -1px 0 rgba(255, 255, 255, 0.24),
+    inset -2px -6px 1px rgba(255, 255, 255, 0.18),
+    inset -1px 2px 3px rgba(0, 0, 0, 0.4),
+    inset 0 -4px 1px rgba(0, 0, 0, 0.2);
+}
+
+.nav-icons {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.nav-icons a,
+.nav-email {
+  display: block;
+}
+
+/* the email icon is a button (it copies the address), reset to look like the LinkedIn link */
+.nav-email {
+  position: relative; /* for its [data-tip] tooltip */
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.nav-email:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+/* read by screen readers, not shown (the email "copied" announcement) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Figma shows the icons at 75%; set on the images, not the group, so the email tooltip stays solid. Full on hover */
+.nav-icons img {
+  opacity: 0.75;
+  transition: opacity 0.15s;
+}
+
+.nav-icons :is(a, button):hover img {
+  opacity: 1;
+}
+
+/* Not in the design: on narrow screens the tabs shrink to their text, and the name goes when there's no room for it */
+@media (max-width: 900px) {
+  .nav-tab {
+    width: auto;
+    padding-inline: 12px;
+  }
+
+  .nav-tab.is-active {
+    width: auto;
+    padding-inline: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav {
+    grid-template-columns: auto 1fr;
+  }
+
+  .nav-name {
+    display: none;
+  }
+
+  .nav-tabs {
+    margin-right: 0;
+  }
 }
 
 a:focus-visible {
@@ -154,7 +269,6 @@ a:focus-visible {
   font-weight: 400;
   font-size: clamp(44px, 6.6vw, 96px); /* 96px at the 1470px design width */
   line-height: 1;
-  letter-spacing: -0.01em;
 }
 
 /* Intro start state for the [data-intro] block (homepage hero, About intro), played in by js/hero-intro.js:
@@ -343,7 +457,6 @@ a:focus-visible {
   background: var(--pill-bg);
   color: var(--pill-text);
   font: 14px/1.2 var(--ui);
-  letter-spacing: normal;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
@@ -494,7 +607,6 @@ a:focus-visible {
   font-family: var(--mono);
   font-size: 11px;
   font-weight: 400;
-  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted);
   transition: color 0.4s ease;
@@ -549,7 +661,6 @@ a:focus-visible {
 .cv-date {
   font-family: var(--mono);
   font-size: 13px;
-  letter-spacing: 0.05em;
   white-space: nowrap;
   color: var(--muted);
   transition: color 0.4s ease;
@@ -575,7 +686,6 @@ a:focus-visible {
   padding-bottom: 90px;
   font-family: var(--mono);
   font-size: 11px;
-  letter-spacing: 0.1em;
   color: var(--muted);
 }
 

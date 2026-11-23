@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" />
-    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,600&display=swap" />
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,600&f[]=clash-display@500&display=swap" />
     <link rel="stylesheet" href="css/home.css" />
     <!-- theme picked earlier this session, else the system's; runs before paint so there is no flash -->
     <script>
@@ -25,13 +25,18 @@
 
   <body>
     <header class="nav">
-      <nav aria-label="Main">
-        <span class="pill is-active" aria-current="page">work</span>
+      <a class="nav-name" href="index.html">Tay Yu Qing</a>
+      <nav class="nav-tabs" aria-label="Main">
+        <span class="nav-tab is-active" aria-current="page">work</span>
         <!-- TODO: link once the playground page exists -->
-        <span class="pill">playground</span>
-        <a class="pill" href="about.html">about</a>
-        <a class="pill" href="https://www.linkedin.com/in/tayyuqing/" target="_blank" rel="noopener">linkedin<span class="pill-arrow" aria-hidden="true"></span></a>
+        <span class="nav-tab">playground</span>
+        <a class="nav-tab" href="about.html">about</a>
       </nav>
+      <div class="nav-icons">
+        <button class="nav-email" type="button" data-email="tayyuqing.work@gmail.com" data-tip="copy email" aria-label="Copy email address"><img class="mono" src="img/home/email.svg" alt="" width="32" height="32" /></button>
+        <span class="nav-email-status sr-only" role="status"></span>
+        <a href="https://www.linkedin.com/in/tayyuqing/" target="_blank" rel="noopener" aria-label="LinkedIn"><img class="mono" src="img/home/linkedin.png" alt="" width="24" height="24" /></a>
+      </div>
     </header>
 
     <main class="container">
@@ -90,6 +95,7 @@
       });
     </script>
     <script src="js/tip.js"></script>
+    <script src="js/copy-email.js"></script>
     <script src="js/hero-intro.js"></script>
   </body>
 </html>
