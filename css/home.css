@@ -20,7 +20,7 @@
   --gutter: clamp(16px, 4vw, 58.8px);
   --display: "Clash Display", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
-  --ui: "TikTok Sans", system-ui, sans-serif;
+  --ui: "Erode", Georgia, serif; /* Fontshare, loaded in each page's <head> */
 }
 
 /* Light mode (Figma 15:469), turned on by the switch after "fun" */
@@ -427,6 +427,8 @@ a:focus-visible {
 }
 
 .hero-sm {
+  display: block; /* the About heading doesn't fill the screen like the homepage hero */
+  min-height: 0;
   max-width: 16em;
   padding-bottom: 24px;
   font-size: clamp(32px, 4.4vw, 64px);
