@@ -11,6 +11,12 @@ a:hover {
   text-decoration: none;
 }
 
+/* links in body text stay underlined (the old styles strip it), like About's "musing in museums" */
+p a,
+p a:hover {
+  text-decoration: underline;
+}
+
 /* Headings in the display face, as on the homepage and About */
 h1,
 h2,
@@ -34,8 +40,8 @@ h6 {
   color: var(--muted);
 }
 
-/* Small labels (section names, "My Role", "WHY IT MATTERS"), styled like About's "WORK" label */
-section .headline-subtitle,
+/* Small labels (section names in the narrow side column, "My Role", "WHY IT MATTERS"), styled like About's "WORK" label */
+.col-md-2 > .headline-subtitle,
 .list-unstyled b,
 .loc-label {
   font-family: var(--mono);
