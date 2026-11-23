@@ -446,3 +446,76 @@ html { scroll-behavior: smooth; }
 #mr-stage .drivers .driver,
 #sel-stage .drivers .driver,
 #loc-stage .drivers .driver { height: 100vh; }
+
+/* ---------- Narrow screens ----------
+   The three columns need 1200px, so below that the intro and step list sit above the story,
+   leaving the phone and the text side by side. The scroll-driven stepping is unchanged. */
+@media (max-width: 1199px) {
+  #mr-stage,
+  #sel-stage,
+  #loc-stage { flex-wrap: wrap; }
+
+  #mr-stage .left,
+  #sel-stage .left,
+  #loc-stage .left {
+    position: static;
+    width: 100%;
+    height: auto;
+    padding: 48px 6vw 24px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+  }
+
+  #mr-stage .steps-nav,
+  #sel-stage .steps-nav,
+  #loc-stage .steps-nav { margin: 24px 0; }
+
+  #mr-stage .center,
+  #sel-stage .center { width: 45%; }
+
+  #mr-stage .right,
+  #sel-stage .right,
+  #loc-stage .right { min-width: 0; }
+
+  /* no phone column here, so the text column must take its own full-width row under the intro */
+  #loc-stage .right { flex-basis: 100%; }
+}
+
+/* Phones: the phone pins to the top half and the step text to the bottom half.
+   svh so the text isn't hidden behind the browser's toolbar; 64px clears the site header */
+@media (max-width: 767px) {
+  #mr-stage,
+  #sel-stage { flex-direction: column; flex-wrap: nowrap; }
+
+  #mr-stage .center,
+  #sel-stage .center {
+    top: 64px;
+    width: 100%;
+    height: 50svh;
+  }
+
+  #mr-stage .pin,
+  #sel-stage .pin {
+    top: calc(64px + 50svh);
+    height: calc(50svh - 64px);
+  }
+
+  #mr-stage .panel,
+  #sel-stage .panel {
+    height: calc(50svh - 64px);
+    justify-content: flex-start;
+    padding: 12px 6vw 0;
+  }
+
+  #mr-stage .text-film,
+  #sel-stage .text-film { transform: translateY(calc(var(--step) * (64px - 50svh))); }
+
+  #mr-stage .panel p,
+  #sel-stage .panel p { font-size: 15px; line-height: 1.6; }
+
+  /* the localisation screens and notes are far taller than a phone screen, so that story becomes a plain list */
+  #loc-stage .pin { position: static; height: auto; overflow: visible; }
+  #loc-stage .text-film { transform: none; }
+  #loc-stage .panel { height: auto; padding: 32px 6vw; }
+  #loc-stage .drivers { display: none; }
+}
