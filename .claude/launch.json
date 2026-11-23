@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "site",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["-y", "http-server@14.1.1", "/Users/yuqing/Documents/GitHub/yuqing-2027-portfolio", "-p", "8080", "-c-1"],
+      "port": 8080
+    }
+  ]
+}
