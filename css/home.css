@@ -169,13 +169,40 @@ a:focus-visible {
   gap: 8px;
 }
 
-/* Childhood photo after "Hi,", sized like the studio_works mockup (121×80 at 96px type) */
+/* Childhood photo after "Hi,", linking to About; sized like the studio_works mockup (121×80 at 96px type) */
 .hero-photo {
   width: 1.26em;
   height: 0.833em;
   margin-inline: 0.167em;
   border-radius: 0.083em;
-  object-fit: cover;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot, so it springs */
+}
+
+.hero-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* crops rather than squashes while the intro grows the link's width */
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Hover: the photo tilts up like a picked-up print while the picture zooms in a touch */
+.hero-photo:hover,
+.hero-photo:focus-visible {
+  transform: rotate(-4deg) scale(1.08);
+}
+
+.hero-photo:hover img,
+.hero-photo:focus-visible img {
+  transform: scale(1.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo,
+  .hero-photo img {
+    transition: none;
+  }
 }
 
 .logo {
@@ -194,6 +221,31 @@ a:focus-visible {
   height: 0.833em;
   object-fit: cover;
   object-position: left center;
+}
+
+/* SIA logo painted as a mask over a fill colour, since an <img> can't recolour its SVG.
+   The fill follows the theme (replacing .mono's invert) and turns SIA gold on hover */
+.logo-sia {
+  background-color: var(--text);
+  mask: url("../img/home/sia.svg") no-repeat center / contain;
+  object-position: -9999px 0; /* moves the img's own white pixels out of view; the mask draws the logo */
+  transition: background-color 0.3s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* lifts and tilts up a little, like the bird taking off */
+.logo-sia:hover {
+  background-color: #b08340;
+  transform: translateY(-0.06em) rotate(-8deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-sia {
+    transition: background-color 0.3s ease;
+  }
+
+  .logo-sia:hover {
+    transform: none;
+  }
 }
 
 /* last logo before the comma has no margin (monad.svg already includes its own) */
