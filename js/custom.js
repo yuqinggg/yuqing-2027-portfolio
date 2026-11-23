@@ -402,7 +402,13 @@ function initScrollStage(stageId, phoneScaleId, screenPrefix, images, screenTran
   var navButtons = Array.prototype.slice.call(stage.querySelectorAll(".step-btn"));
   var drivers = Array.prototype.slice.call(stage.querySelectorAll(".driver"));
   var screenSlots = Array.prototype.slice.call(stage.querySelectorAll(".screen-slot"));
+  var panels = Array.prototype.slice.call(stage.querySelectorAll(".panel"));
   var current = 0;
+
+  // where a story is laid out as a plain list (localisation on phones) its drivers are hidden; the panels mark the steps instead
+  function markers() {
+    return drivers[0] && drivers[0].offsetHeight ? drivers : panels;
+  }
 
   if (crossfade && screenSlots[0]) {
     screenSlots[0].classList.add("is-active");
@@ -424,14 +430,16 @@ function initScrollStage(stageId, phoneScaleId, screenPrefix, images, screenTran
 
   function computeScale() {
     if (!phoneScale) return;
-    var s = Math.min((480 - 48) / 417, (window.innerHeight - 48) / 900);
+    // fit the phone to its column (480px by the full height on desktop; narrower or shorter on small screens)
+    var box = phoneScale.parentElement;
+    var s = Math.min((box.clientWidth - 48) / 417, (box.clientHeight - 48) / 900);
     phoneScale.style.setProperty("--scale", s);
   }
 
   navButtons.forEach(function (btn) {
     btn.addEventListener("click", function () {
       var i = parseInt(btn.getAttribute("data-step"), 10);
-      var d = drivers[i];
+      var d = markers()[i];
       if (!d) return;
       var scroller = document.scrollingElement || document.documentElement;
       var r = d.getBoundingClientRect();
@@ -453,7 +461,7 @@ function initScrollStage(stageId, phoneScaleId, screenPrefix, images, screenTran
   function onScroll() {
     var mid = window.innerHeight / 2;
     var best = 0, bestD = Infinity;
-    drivers.forEach(function (d, i) {
+    markers().forEach(function (d, i) {
       var r = d.getBoundingClientRect();
       var dist = Math.abs(r.top + r.height / 2 - mid);
       if (dist < bestD) { bestD = dist; best = i; }
