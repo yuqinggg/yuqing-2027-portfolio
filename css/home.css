@@ -27,6 +27,14 @@
   --muted: #6e6754; /* not in Figma: its #b8b09b is unreadable on cream */
 }
 
+/* Fade between themes; the headline and cards inherit body's colour, so they fade with it */
+body,
+.footer,
+.switch,
+.mono {
+  transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, filter 0.4s ease;
+}
+
 /* White artwork would vanish on cream; Figma's light frame doesn't handle this yet */
 :root[data-theme="light"] .mono {
   filter: invert(1);
@@ -171,7 +179,7 @@ a:focus-visible {
   background: #fff;
   box-shadow: 0 6px 10px 4px rgba(0, 0, 0, 0.15), 0 2px 3px 0 rgba(0, 0, 0, 0.3);
   transform: translateY(-50%);
-  transition: transform 0.25s ease;
+  transition: transform 0.4s ease; /* same timing as the theme fade */
 }
 
 /* on: knob slides to the right edge (179 inner width - 57 knob - 2×8 inset) */
