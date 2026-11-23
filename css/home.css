@@ -11,8 +11,12 @@
   --text: #f2ede0;
   --muted: #b8b09b;
   --rule: #322e21;
+  --nav-tint: rgba(0, 0, 0, 0.8);
   --pill-bg: #2a2a2a;
   --pill-text: #c8c8c8;
+  --pill-active-bg: #fff;
+  --pill-active-text: #000;
+  --pill-hover: brightness(1.35);
   --gutter: clamp(16px, 4vw, 58.8px);
   --display: "Clash Display", system-ui, sans-serif;
   --mono: "IBM Plex Mono", ui-monospace, monospace;
@@ -25,6 +29,20 @@
   --bg: #f2ede0;
   --text: #1e1e1e;
   --muted: #6e6754; /* not in Figma: its #b8b09b is unreadable on cream */
+  /* nav isn't designed for light mode: cream fade, pills mirror the dark ones */
+  --nav-tint: rgba(242, 237, 224, 0.8);
+  --pill-bg: #e2dccb;
+  --pill-text: #4a463c;
+  --pill-active-bg: #1e1e1e;
+  --pill-active-text: #f2ede0;
+  --pill-hover: brightness(0.94);
+}
+
+/* Registered so the nav's gradient colour can fade (gradients themselves can't transition) */
+@property --nav-tint {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: rgba(0, 0, 0, 0.8);
 }
 
 /* Fade between themes; the headline and cards inherit body's colour, so they fade with it */
@@ -75,9 +93,10 @@ img {
   justify-content: flex-end;
   padding: 8px var(--gutter);
   margin-bottom: -76px; /* overlay the hero like the design, instead of pushing it down */
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  background: linear-gradient(to bottom, var(--nav-tint), transparent);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
+  transition: --nav-tint 0.4s ease;
 }
 
 .nav nav {
@@ -93,16 +112,16 @@ img {
   text-decoration: none;
   background: var(--pill-bg);
   color: var(--pill-text);
-  transition: filter 0.15s;
+  transition: filter 0.15s, background-color 0.4s ease, color 0.4s ease;
 }
 
 .pill.is-active {
-  background: #fff;
-  color: #000;
+  background: var(--pill-active-bg);
+  color: var(--pill-active-text);
 }
 
 a.pill:hover {
-  filter: brightness(1.35);
+  filter: var(--pill-hover);
 }
 
 a:focus-visible {
