@@ -263,7 +263,6 @@ a:focus-visible {
 .switch {
   --u: calc(1em / 96);
   position: relative;
-  overflow: hidden; /* keeps the knob inside while the intro grows the switch from zero width */
   flex: none;
   width: calc(181 * var(--u));
   height: calc(72 * var(--u));
@@ -324,9 +323,45 @@ a:focus-visible {
   outline-offset: 3px;
 }
 
+/* keeps the knob inside while the intro grows the switch from zero width; only during the intro so the tooltip isn't clipped */
+.js .switch {
+  overflow: hidden;
+}
+
+/* Tooltip on hover/keyboard focus, styled like the nav pills. Visual only: the button's aria-label stays its name.
+   It follows the cursor, below-right of it (--tip-x/y set by the switch script); keyboard focus puts it below-right of the centre */
+.switch::after {
+  content: "i love window seats";
+  position: absolute;
+  top: calc(var(--tip-y, 50%) + 20px); /* clears the cursor's arrow */
+  left: calc(var(--tip-x, 50%) + 12px);
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--pill-bg);
+  color: var(--pill-text);
+  font: 14px/1.2 var(--ui);
+  letter-spacing: normal;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.2s ease, transform 0.2s ease; /* top/left aren't transitioned, so it tracks the cursor without lag */
+}
+
+.switch:hover::after,
+.switch:focus-visible::after {
+  opacity: 1;
+  transform: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .switch-knob {
     transition: none;
+  }
+
+  .switch::after {
+    transform: none;
+    transition: opacity 0.2s ease;
   }
 }
 

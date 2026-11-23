@@ -87,6 +87,12 @@
         document.documentElement.dataset.theme = light ? "light" : "dark";
         try { sessionStorage.setItem("theme", document.documentElement.dataset.theme); } catch (e) {}
       });
+      // the tooltip (.switch::after) sits below-right of these, measured from inside the switch's border
+      s.addEventListener("pointermove", (e) => {
+        const r = s.getBoundingClientRect();
+        s.style.setProperty("--tip-x", e.clientX - r.left - s.clientLeft + "px");
+        s.style.setProperty("--tip-y", e.clientY - r.top - s.clientTop + "px");
+      });
     </script>
     <script src="js/hero-intro.js"></script>
   </body>
