@@ -211,21 +211,18 @@ document.addEventListener('DOMContentLoaded', function() {
         page2.style.display = 'none';
         page3.style.display = 'none';
         
-        // Reset all dots
-        dot1.style.background = '#bbb';
-        dot2.style.background = '#bbb';
-        dot3.style.background = '#bbb';
-        
-        // Show selected page and highlight dot
+        // Highlight the current dot; its colours come from the stylesheet so they follow the theme
+        [dot1, dot2, dot3].forEach(function (dot, n) {
+            dot.classList.toggle('is-active', n + 1 === pageNum);
+        });
+
+        // Show selected page
         if (pageNum === 1) {
             page1.style.display = '';
-            dot1.style.background = '#333';
         } else if (pageNum === 2) {
             page2.style.display = '';
-            dot2.style.background = '#333';
         } else if (pageNum === 3) {
             page3.style.display = '';
-            dot3.style.background = '#333';
         }
         currentPage = pageNum;
     }

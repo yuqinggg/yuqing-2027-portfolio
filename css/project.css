@@ -108,3 +108,24 @@ h6 {
   color: #1a1a1a;
   font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+
+/* Interlogue research gallery: its arrows and dots carry inline dark greys meant for the old white page,
+   so these need !important to win. js/custom.js marks the current dot with .is-active */
+.gallery-arrow {
+  color: var(--text) !important;
+}
+
+.slider-dot {
+  background: var(--muted) !important;
+  opacity: 0.4;
+}
+
+.slider-dot.is-active {
+  background: var(--text) !important;
+  opacity: 1;
+}
+
+/* captions read as secondary text, like the rest of the site's */
+figcaption {
+  color: var(--muted);
+}

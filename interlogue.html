@@ -7,11 +7,12 @@
         <meta name="YuQing's Portfolio | Interlogue" content="Interlogue museum programme">
         <link rel="canonical" href="https://www.tayyuqing.com" />
         <title>YuQing's Portfolio | Interlogue</title>
-        <!-- Google Fonts: Muli (async) -->
+        <!-- Site fonts, as on the homepage -->
+        <link rel="preload" href="fonts/ClashDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin />
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="preload" href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Muli:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i&display=swap"></noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" />
+        <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-grotesk@400,600&f[]=clash-display@500&display=swap" />
         <!-- Non-critical CSS: Load asynchronously -->
         <link rel="preload" href="vendor/bootstrap/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
         <link rel="preload" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome-font-awesome.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -23,46 +24,34 @@
             <link href="css/style.css" rel="stylesheet">
             <link href="css/custom.css" rel="stylesheet">
         </noscript>
-        <!-- Critical CSS: Preloader (inline to prevent FOUC) -->
-        <style>
-            #preloader { position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 999; background: #fff; }
-        </style>
+        <!-- 2027 theme: after the old styles so its tokens and overrides win -->
+        <link rel="stylesheet" href="css/home.css" />
+        <link rel="stylesheet" href="css/project.css" />
+        <!-- theme picked earlier this session, else the system's; runs before paint so there is no flash -->
+        <script>
+            try { var savedTheme = sessionStorage.getItem("theme"); } catch (e) {}
+            document.documentElement.dataset.theme = savedTheme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+        </script>
     </head>
 
     <body>
-        <div id="preloader">
-            <div id="loader"></div>
-        </div>
-        <!-- Navigation -->
-        <div class="parallax-container" style="height:500px;">
-            <div id="parallax-bg-img-3" class="bg-img-3 parallax" style="width:100%;position:absolute;top:0;left:0;will-change:transform;">
-                <nav class="navbar navbar-expand-sm navbar-dark bg-transparent py-3 navbar-theme-dark" id="mainNav" data-navbar-theme="dark">
-                    <div class="container">
-                        <a class="navbar-brand js-scroll-trigger" href="index.html">Tay Yu Qing</a>
-                        <button
-                            class="navbar-toggler"
-                            type="button"
-                            data-toggle="collapse"
-                            data-target="#navbarResponsive"
-                            aria-controls="navbarResponsive"
-                            aria-expanded="false"
-                            aria-label="Toggle navigation"
-                            >
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarResponsive">
-                            <ul class="navbar-nav ml-auto">
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="index.html">Work</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link js-scroll-trigger" href="about.html">About</a>
-                            </li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
+        <header class="nav">
+            <a class="nav-name" href="index.html">Tay Yu Qing</a>
+            <nav class="nav-tabs" aria-label="Main">
+                <a class="nav-tab is-active" href="index.html">work</a>
+                <!-- TODO: link once the playground page exists -->
+                <span class="nav-tab">playground</span>
+                <a class="nav-tab" href="about.html">about</a>
+            </nav>
+            <div class="nav-icons">
+                <button class="nav-email" type="button" data-email="tayyuqing.work@gmail.com" data-tip="copy email" aria-label="Copy email address"><img class="mono" src="img/home/email.svg" alt="" width="32" height="32" /></button>
+                <span class="nav-email-status sr-only" role="status"></span>
+                <a href="https://www.linkedin.com/in/tayyuqing/" target="_blank" rel="noopener" aria-label="LinkedIn"><img class="mono" src="img/home/linkedin.png" alt="" width="24" height="24" /></a>
             </div>
+        </header>
+        <!-- cover banner (moves with scroll via js/custom.js) -->
+        <div class="parallax-container" style="height:500px;">
+            <div id="parallax-bg-img-3" class="bg-img-3 parallax" style="width:100%;position:absolute;top:0;left:0;will-change:transform;"></div>
         </div>
 
         <!-- Header -->
@@ -344,16 +333,13 @@
 
 
    <!-- footer -->
-   <footer class="footer pb-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="copy"> &copy; 2026 <a href=index.html> tayyuqing.com </a></div>
-            </div>
-        </div>
-    </div>
-</footer>
+   <footer class="container footer">
+       2026 © Made possible with Claude
+       <img class="mono" src="img/home/claude.png" alt="" width="16" height="16" />
+   </footer>
     <!-- /main content -->
+    <script src="js/tip.js"></script>
+    <script src="js/copy-email.js"></script>
     <!-- JavaScript -->
     <script src="vendor/jquery/jquery.min.js" defer></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" defer></script>
